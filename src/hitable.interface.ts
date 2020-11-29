@@ -7,5 +7,11 @@ export default interface HitableInterface {
     t_min: number,
     t_max: number
   ) =>
-    HitRecord | null
+    [HitRecord,Ray]
+}
+
+type HitResult = [HitRecord,Ray]
+
+export {
+  HitResult
 }

@@ -3,6 +3,7 @@ import Camera from './camera'
 import Vec3 from './vec3'
 import Sphere from './sphere'
 import HitList from './hitList'
+import type Ray from './ray'
 
 const ball = new Sphere(new Vec3(0, 0, -1), 0.5)
 const balll = new Sphere(new Vec3(1, 0, -1), 0.5)
@@ -22,29 +23,36 @@ const camera = new Camera(
   new Vec3(0, 2, 0) //vertical
 )
 
-function color(_x: number, _y: number) {
-  const [x, y] = [_x, 1 - _y]
+function trace(sence: HitList, r: Ray, step = 0): Vec3 {
 
+  if (step > 50) return new Vec3(0, 0, 0)
 
-  const r = camera.getRay(x, y)
-
-  const hit = world.hit(r, 0, Infinity)
+  const hit = sence.hit(r, 0.0000001, Infinity)
 
   let res: Vec3
 
+
   if (hit) {
-
-    res = hit.normal.unitVec().add(1).mul(0.5)
-
+    res = trace(sence, hit[1], ++step)
   } else {
     // 设置背景色
     const unitDirection = r.direction.unitVec(),
       t = (unitDirection.e1 + 1.0) * 0.5
 
-    res = Vec3.add(new Vec3(1, 1, 1).mul(1 - t), new Vec3(0.3, 0.5, 1).mul(t))
-
+    res = Vec3.add(
+      new Vec3(1, 1, 1).mul(1 - t),
+      new Vec3(0.3, 0.5, 1).mul(t)
+    )
   }
+  return res
+}
 
+function color(_x: number, _y: number) {
+  const [x, y] = [_x, 1 - _y]
+
+  const r = camera.getRay(x, y)
+
+  const res = trace(world, r)
 
   return [res.e0, res.e1, res.e2]
 }

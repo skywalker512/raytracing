@@ -3,7 +3,7 @@ import type Ray from './ray'
 import HitRecord from './hitRecord'
 import type HitableInterface from './hitable.interface'
 
-export default class Sphere  implements HitableInterface {
+export default class Sphere {
   constructor(public center: Vec3, public radius: number) {
   }
 
@@ -27,15 +27,7 @@ export default class Sphere  implements HitableInterface {
         hit.normal = hit.p.sub(this.center).div(this.radius)
 
 
-        return hit
-      }
-      temp = (-b + Math.sqrt(discriminate)) / (2 * a)
-      if (temp > t_min && temp < t_max) {
-        hit.t = temp
-        hit.p = ray.getPoint(temp)
-        hit.normal = hit.p.sub(this.center).div(this.radius)
-
-        return hit
+        return [hit,ray.reflect(hit)]
       }
     }
 

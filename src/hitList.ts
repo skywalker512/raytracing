@@ -1,4 +1,5 @@
-import type hitable from "./hitable.interface";
+import type hitable from './hitable.interface'
+import type { HitResult } from './hitable.interface'
 import type HitRecord from './hitRecord'
 import type Ray from './ray'
 
@@ -12,18 +13,18 @@ export default class HitList {
 
   hit(ray: Ray, t_min: number, t_max: number) {
     let closest_t = t_max,
-      hit: HitRecord | undefined = undefined
+      res: HitResult | undefined = undefined
 
     this.list.forEach(v => {
-      let _hit = v.hit(ray, t_min, t_max)
-      if (_hit && (_hit.t < closest_t)) {
-        hit = _hit
-        closest_t = _hit.t
+      let _res = v.hit(ray, t_min, t_max)
+      if (_res && (_res[0].t < closest_t)) {
+        res = _res
+        closest_t = res[0].t
       }
 
     })
 
-    return hit as HitRecord | undefined
+    return res as HitResult | undefined
   }
 
 }
