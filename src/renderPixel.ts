@@ -33,7 +33,7 @@ function trace(sence: HitList, r: Ray, step = 0): Vec3 {
 
 
   if (hit) {
-    res = trace(sence, hit[1], ++step)
+    res = trace(sence, hit[1], ++step).mul(0.5)
   } else {
     // 设置背景色
     const unitDirection = r.direction.unitVec(),
