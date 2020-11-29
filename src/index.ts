@@ -103,25 +103,37 @@ function initTasks(
   height: number,
   amount: number
 ) {
-  // 获取 canvas 像素总数 n
   const n = width * height
-  // 向上取整数
-  // 每个 task 需要处理的像素数量 len
   const len = Math.ceil(n / amount)
 
-  let task = new RenderTask([], width, height)
-
+  // 创建一个二维数组，存放 2d 像素点
+  const pixels: Px[][] = []
+  // 构建二维数组
   for (let y = 0; y < height; y++) {
+    pixels.push([])
     for (let x = 0; x < width; x++) {
-      task.pixels.push(new Px(x, y))
+      pixels[y].push(new Px(x, y))
+    }
+  }
 
-      // 每当task 内部的像素数量等于 len 时候 或者 处理到最后一个像素的时候
-      if (task.pixels.length >= len || y * width + x === n - 1) {
-        // 处理 task
-        performTask(task, n)
-        // 更新 task
-        task = new RenderTask([], width, height)
-      }
+  let task = new RenderTask([], width, height)
+  while (pixels.length) {
+    // 随机取一个 y
+    const y = Math.floor(Math.random() * (pixels.length - 0.0001))
+    // 选取一行
+    const pxs = pixels[y]
+    // 随机取一个 x
+    const x = Math.floor(Math.random() * (pxs.length - 0.0001))
+    // 选取一个像素点
+    const px = pxs.splice(x, 1)[0]
+
+    task.pixels.push(px)
+    // 删除一行
+    if (pxs.length == 0) pixels.splice(y, 1)
+
+    if (task.pixels.length >= len || pixels.length == 0) {
+      performTask(task, n)
+      task = new RenderTask([], width, height)
     }
   }
 }
