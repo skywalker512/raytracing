@@ -9,9 +9,13 @@
     <title>Snowpack App</title>
   </head>
   <body>
-    <img id="img" src="/logo.svg" />
-    <canvas id="canvas"></canvas>
     <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="app">
+      <div class="processbar">
+        <div class="processline" id="processline"></div>
+      </div>
+      <canvas id="cv"></canvas>
+    </div>
     <script type="module" src="/_dist_/index.js"></script>
     <!--
       This HTML file is a template.
