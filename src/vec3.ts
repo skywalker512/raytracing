@@ -1,4 +1,13 @@
 export default class Vec3 {
+  /**
+   *
+   * 三维向量类 Vec3 ，用它可以在三维空间中表述一个点的
+   * 坐标/一个方向
+   * 或者表述一个颜色 ( rgb 值 )
+   * @param e0
+   * @param e1
+   * @param e2
+   */
   constructor(public e0 = 0, public e1 = 0, public e2 = 0) {
   }
 
@@ -47,14 +56,6 @@ export default class Vec3 {
     return v1.e0 * v2.e0 + v1.e1 * v2.e1 + v1.e2 * v2.e2
   }
 
-  static cross(v1: Vec3, v2: Vec3) {
-    return new Vec3(
-      (v1.e1 * v2.e2 - v1.e2 * v2.e1),
-      (v1.e0 * v2.e2 - v1.e2 * v2.e0) * (-1),
-      (v1.e0 * v2.e1 - v1.e1 * v2.e0)
-    )
-  }
-
   add(v: Vec3 | number) {
     return Vec3.add(this, v)
   }
@@ -71,7 +72,7 @@ export default class Vec3 {
     return Vec3.div(this, v)
   }
 
-  //单位向量(向量方向)
+  // 单位向量(向量方向)
   unitVec() {
     return this.div(this.length())
   }

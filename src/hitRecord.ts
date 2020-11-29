@@ -1,16 +1,15 @@
 import Vec3 from "./vec3"
 
 export default class HitRecord {
-  t: number
-  p: Vec3
-  normal: Vec3
+  /**
+   * 碰撞记录
+   * @param t 时间参数t
+   * @param p 发生碰撞的坐标 p
+   * @param normal 发生碰撞时的法线方向 normal
+   */
   constructor(
-    t: number = 0,
-    p: Vec3 = new Vec3(0, 0, 0),
-    normal: Vec3 = new Vec3(0, 0, 0)) {
-
-    this.t = t
-    this.p = p
-    this.normal = normal
+    public t: number = 0,
+    public p: Vec3 = new Vec3(0, 0, 0),
+    public normal: Vec3 = new Vec3(0, 0, 0)) {
   }
 }

@@ -71,7 +71,6 @@ function performTask(task: RenderTask, amount: number) {
         bar.style.width = (complete / amount) * 100 + '%'
       }
       ctx?.putImageData(imageData, 0, 0)
-      console.log((complete / amount))
       worker.terminate()
     }
   }
@@ -122,7 +121,7 @@ function initTasks(
     const y = Math.floor(Math.random() * (pixels.length - 0.0001))
     // 选取一行
     const pxs = pixels[y]
-    // 随机取一个 x
+    // 随机取一个 x, 且不会取到最后一个
     const x = Math.floor(Math.random() * (pxs.length - 0.0001))
     // 选取一个像素点
     const px = pxs.splice(x, 1)[0]
