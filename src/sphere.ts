@@ -1,8 +1,9 @@
 import Vec3 from './vec3'
 import type Ray from './ray'
 import HitRecord from './hitRecord'
+import type HitableInterface from './hitable.interface'
 
-export default class Sphere {
+export default class Sphere implements HitableInterface {
   /**
    * 球 (必要信息，球心和半径)
    * @param center 球心坐标
@@ -11,7 +12,7 @@ export default class Sphere {
   constructor(public center: Vec3, public radius: number) {
   }
 
-  hit(ray: Ray, t_min: number, t_max: number) {
+  hit(ray: Ray, t_min: number, t_max: number) : [HitRecord, Ray] | undefined {
 
     let hit = new HitRecord()
 

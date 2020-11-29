@@ -13,10 +13,10 @@ export default interface HitableInterface {
     t_min: number,
     t_max: number
   ) =>
-    [HitRecord,Ray]
+    [HitRecord, Ray] | undefined
 }
 
-type HitResult = [HitRecord,Ray]
+type HitResult = ReturnType<HitableInterface["hit"]>
 
 export {
   HitResult

@@ -5,15 +5,14 @@ import Sphere from './sphere'
 import HitList from './hitList'
 import type Ray from './ray'
 
-const ball = new Sphere(new Vec3(0, 0, -1), 0.5)
-const balll = new Sphere(new Vec3(1, 0, -1), 0.5)
-const ballll = new Sphere(new Vec3(-1, 0, -1), 0.5)
+const ball1 = new Sphere(new Vec3(0, 0, -1), 0.5)
+const ball2 = new Sphere(new Vec3(1, 0, -1), 0.5)
+const ball3 = new Sphere(new Vec3(-1, 0, -1), 0.5)
 const earth = new Sphere(new Vec3(0, -100.5, -1), 100)
 
 
 const world = new HitList(
-  // @ts-ignore
-  ball, balll, ballll, earth
+  ball1, ball2, ball3, earth
 )
 
 const camera = new Camera(

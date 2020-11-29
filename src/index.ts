@@ -8,7 +8,6 @@ canvas.height = height
 canvas.width = width
 
 const ctx = canvas.getContext('2d')
-const image = ctx?.createImageData(width, height)
 const bar = document.getElementById('processline') as HTMLElement
 
 
@@ -21,12 +20,7 @@ export class Px {
   b: number
   a: number
 
-  x: number
-  y: number
-
-  constructor(x: number, y: number) {
-    this.x = x
-    this.y = y
+  constructor(public x: number, public y: number) {
     this.r = this.g = this.b = this.a = 0
   }
 }
