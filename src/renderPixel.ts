@@ -2,8 +2,18 @@ import type { Px } from './index'
 import Camera from './camera'
 import Vec3 from './vec3'
 import Sphere from './sphere'
+import HitList from './hitList'
 
 const ball = new Sphere(new Vec3(0, 0, -1), 0.5)
+const balll = new Sphere(new Vec3(1, 0, -1), 0.5)
+const ballll = new Sphere(new Vec3(-1, 0, -1), 0.5)
+const earth = new Sphere(new Vec3(0, -100.5, -1), 100)
+
+
+const world = new HitList(
+  // @ts-ignore
+  ball, balll, ballll, earth
+)
 
 const camera = new Camera(
   new Vec3(0, 0, 1), //origin
@@ -18,7 +28,7 @@ function color(_x: number, _y: number) {
 
   const r = camera.getRay(x, y)
 
-  const hit = ball.hit(r, 0, Infinity)
+  const hit = world.hit(r, 0, Infinity)
 
   let res: Vec3
 
@@ -34,6 +44,7 @@ function color(_x: number, _y: number) {
     res = Vec3.add(new Vec3(1, 1, 1).mul(1 - t), new Vec3(0.3, 0.5, 1).mul(t))
 
   }
+
 
   return [res.e0, res.e1, res.e2]
 }

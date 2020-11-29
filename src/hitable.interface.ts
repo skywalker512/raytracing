@@ -7,5 +7,5 @@ export default interface HitableInterface {
     t_min: number,
     t_max: number
   ) =>
-    HitRecord
+    HitRecord | null
 }

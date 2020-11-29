@@ -1,8 +1,9 @@
 import Vec3 from './vec3'
 import type Ray from './ray'
 import HitRecord from './hitRecord'
+import type HitableInterface from './hitable.interface'
 
-export default class Sphere {
+export default class Sphere  implements HitableInterface {
   constructor(public center: Vec3, public radius: number) {
   }
 
