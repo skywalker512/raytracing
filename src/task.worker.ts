@@ -1,8 +1,17 @@
 import type { Px } from './index'
 import RenderTask from './renderTask'
 
-function renderPixel(v: Px, width: number, height: number) {
-  v.r = v.g = v.b = v.a = 255
+function color(_x: number, _y: number) {
+  const [x, y] = [_x, 1 - _y]
+  return [x, y, 0.3]
+}
+
+export function renderPixel(
+  v: Px,
+  width: number,
+  height: number) {
+  [v.r, v.g, v.b, v.a] = [...color(v.x / width, v.y / height), 1]
+    .map(v => Math.floor(v * 255.9))
 }
 
 function render(task: RenderTask) {
